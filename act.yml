@@ -1,0 +1,50 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: SeTe
+  creationTimestamp: '2019-02-07T19:05:30Z'
+  labels:
+    app: act
+    name: SeTe-Test
+  name: act
+  namespace: sete-test
+  resourceVersion: '12345'
+  selfLink: /apis/build.openshift.io/v1/namespaces/sete-test/buildconfigs/act
+  uid: 508429df-93f4-11e8-b12e-000d3a38da18
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'nodejs-ex:latest'
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: 'https://github.com/sclorg/nodejs-ex'
+    type: Git
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: 'nodejs:8'
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+    - github:
+        secret: sqK6KbzQy1wBlB53YBvP
+      type: GitHub
+    - generic:
+        secret: uYjgocVHf2uLQw0NVzaP
+      type: Generic
+    - type: ConfigChange
+    - imageChange:
+        lastTriggeredImageID: >-
+          registry.access.redhat.com/rhscl/nodejs-8-rhel7@sha256:7b26a9d8ace47e939a9fcdca61620dbe47d1b936e68983e252cca50991704c7c
+      type: ImageChange
+status:
+  lastVersion: 1
